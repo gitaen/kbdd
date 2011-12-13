@@ -229,9 +229,10 @@ unsigned char keycode;
 		//keyboard sends n when pressing a key
 		// and n+63 when releasing the key
                 // (63 keys)
-		key_down	= ( key < 63 );
+		key_down	= ( key <= 63 );
 		if (!key_down)
 			key	= (key-63)&0x3F; // convert key code for key up
+                assert(key <= 63);
 	        keycode         = freedom_kbd[key];
 		if (debug)
 			fprintf(stdout, "%02d %02d\n", buf[0], keycode);
