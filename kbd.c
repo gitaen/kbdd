@@ -233,7 +233,7 @@ unsigned char keycode;
 			key	= (key-63)&0x3F; // convert key code for key up
 	        keycode         = freedom_kbd[key];
 		if (debug)
-			fprintf(stdout, "0x%02x 0x%02x\n", buf[0], keycode);
+			fprintf(stdout, "%02d %02d\n", buf[0], keycode);
        	        if ( key_down ) {
 			if (debug)
 				fprintf(stdout,"press %d\n", keycode);
