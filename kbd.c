@@ -232,7 +232,10 @@ unsigned char keycode;
 		key_down	= ( key <= 63 );
 		if (!key_down)
 			key	= (key-63)&0x3F; // convert key code for key up
-                assert(key <= 63);
+                if (key <= 63) {
+                     fprintf(stdout, "Invalid key: %02d, setting to R\n", key);
+                     key = KEY_R;
+                }
 	        keycode         = freedom_kbd[key];
 		if (debug)
 			fprintf(stdout, "%02d %02d\n", buf[0], keycode);
