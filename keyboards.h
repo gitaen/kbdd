@@ -809,7 +809,7 @@ unsigned char smartbt_normal[64] = {
  ***********************************************************************************/
 unsigned char freedom_kbd[63] = {
 /* keys without modificators */
-/* 00 */ KEY_RESERVED, 	KEY_1, 		KEY_2, 		KEY_3, 		KEY_4, 
+/* 00 */ KEY_RESERVED, 	        KEY_1, 		KEY_2, 		KEY_3, 		KEY_4, 
 /* 05 */ KEY_5, 		KEY_6,  	KEY_Q, 		KEY_W, 		KEY_E, 
 /* 10 */ KEY_R, 		KEY_T, 		KEY_A, 		KEY_S, 		KEY_D,
 /* 15 */ KEY_F, 		KEY_G, 		KEY_Z, 		KEY_X, 		KEY_C, 
@@ -818,10 +818,10 @@ unsigned char freedom_kbd[63] = {
 /* 30 */ KEY_MINUS,		KEY_EQUAL,	KEY_BACKSPACE,	KEY_Y, 		KEY_U, 
 /* 35 */ KEY_I, 		KEY_O, 		KEY_P, 		KEY_LEFTBRACE,	KEY_RIGHTBRACE,
 /* 40 */ KEY_H, 		KEY_J, 		KEY_K, 		KEY_L, 		KEY_SEMICOLON, 
-/* 45 */ KEY_APOSTROPHE,	KEY_ENTER, 	KEY_N, 		KEY_M, 	KEY_COMMA, 
-/* 50 */ KEY_DOT, 	KEY_SLASH, 	KEY_UP, 	KEY_SPACE, 	KEY_ESC /*key with "circle"*/, 
-/* 55 */ KEY_LEFT, 	KEY_DOWN, 	KEY_RIGHT, 	KEY_LEFTCTRL, 	KEY_RIGHTSHIFT,
-/* 60 */ KEY_LEFTSHIFT, 	KEY_DELETE, 	0
+/* 45 */ KEY_APOSTROPHE,	KEY_ENTER, 	KEY_N, 		KEY_M, 	        KEY_COMMA, 
+/* 50 */ KEY_DOT, 	        KEY_SLASH, 	KEY_UP, 	KEY_SPACE, 	KEY_ESC /*key with "circle"*/, 
+/* 55 */ KEY_LEFT, 	        KEY_DOWN, 	KEY_RIGHT, 	KEY_LEFTCTRL, 	KEY_RIGHTSHIFT,
+/* 60 */ KEY_LEFTSHIFT, 	KEY_DELETE, 	KEY_INSERT/*Fn*/,
 }; 	
 
 /***********************************************************************************

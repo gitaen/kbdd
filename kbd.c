@@ -227,7 +227,8 @@ unsigned char keycode;
 		read (fd, buf, 1);
 		key             =  buf[0];
 		//keyboard sends n when pressing a key
-		// and n+63 when releasing the key 
+		// and n+63 when releasing the key
+                // (63 keys)
 		key_down	= ( key < 63 );
 		if (!key_down)
 			key	= (key-63)&0x3F; // convert key code for key up
