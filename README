@@ -39,6 +39,10 @@ V0.10
 	Fixed parsing of keyboard names (StowawayXT)
 		by Alberto García Hierro <skyhusker@handhelds.org>
 
+v0.11
+	Fixes for freedom keyboard
+	Provide kbdd binary for fremantle
+	        by Ralf Dragon <dragon@tnt.uni-hannover.de>
 
 kbdd - a userspace daemon/driver for serial keyboard devices
 
@@ -49,7 +53,7 @@ For Familiar-Linux based device use kernel >= 2.4.19-rmk6-pxa1-hh36.11
 Usage:
 
 	modprobe uinput
-	modprobe keybdev
+	modprobe keybdev                (not needed for fremantle)
 	kbdd -p /dev/<ser-port> -t <keyb-type>
 
 Type on the keyboard and you should receive input in the focused window.
