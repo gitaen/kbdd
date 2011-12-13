@@ -1,0 +1,99 @@
+V0.1
+	Initial version
+	Released under GNU GPL
+	(c) 2004/2005 by Nils Faerber <nils.faerber@kernelconcepts.de>
+V0.2
+	Some fixes, new keyboard Type Stowaway by Paul Eggleton
+	Thanks!
+V0.3
+	HP Slim keyboard, by Gordon Maclean
+	ThinkOutside / Fellowes Stowaway XT, by "Trixter" <trixter@0xdecafbad.com>
+V0.4
+	dev-uinput device name changes to accomodate for kernel 2.6 changes
+	added new keyboard type "btslim",
+		thanks to Koen Kooi and Paul Eggleton!
+V0.5
+	Added feature for reading a config file
+	by Alberto Garcia Hierro <skyhusker@handhelds.org>
+V0.6
+	Added LIRC device option, by
+	Yan Seiner <yan@seiner.com>
+V0.7
+	Added Belkin IR, this is reall IR, not IrDA
+	some key -> keycode mapping still seem wrong
+V0.8
+	Added more keyboards
+		Flexis FX-100
+		Benq G250 gamepad
+		GrandTec PocketVIK
+		Micro Foldaway
+		Micro Datapad
+	Some smaller pretty-print corrections
+	Bug fix in Stowaway detection
+V0.9
+	Added Compaq Microkeyboard (by Paul Eggleton)
+	minor code cleanups
+V0.10
+	Added Targus Universal Wireless Keyboard (SIR)
+		by Niki Denev <niki@totalterror.net>
+	Fixed parsing of keyboard names (StowawayXT)
+		by Alberto García Hierro <skyhusker@handhelds.org>
+
+
+kbdd - a userspace daemon/driver for serial keyboard devices
+
+Uses uinput.
+
+For Familiar-Linux based device use kernel >= 2.4.19-rmk6-pxa1-hh36.11
+
+Usage:
+
+	modprobe uinput
+	modprobe keybdev
+	kbdd -p /dev/<ser-port> -t <keyb-type>
+
+Type on the keyboard and you should receive input in the focused window.
+
+To disable auto-keyrepeat using X11 you can use the xset command
+	xset r off
+
+
+Usage:
+./kbdd [-d] [-h] [-c <config file>] -p <serial-port> -t <kbd type>
+-d      enable debugging output
+-h      print this help
+-c <config file>
+        Read port and type from config file
+-p <serial-port>
+        specify serial port device, default /dev/ttyS0
+-t <kbd type>
+        specify the serial keyboard type, supported are:
+        foldable  - Compaq/HP foldable keyboard
+        stowaway  - Targus Stowaway keyboard
+        stowawayxt - Stowaway XT
+        snapntype - Snap'n'Type
+        hpslim    - HP Slim keyboard
+        smartbt   - Smart Bluetooth keyboard
+        lirc      - LIRC consumer IR
+        belkinir  - Belkin IR (not IrDA)
+        flexis    - Flexis FX-100 keyboard
+        g250      - Benq G250 gamepad
+        pocketvik - GrandTec PocketVIK
+        microfold - Micro Innovations Foldaway keyboard
+        micropad  - Micro Innovations Datapad
+        microkbd  - Compaq MicroKeyboard
+
+Example:
+        ./kbdd -t foldable
+
+
+Example config file:
+
+--------->
+# This is the default config file for kbdd
+# Only lines starting with "port:" or  "type:" are parsed,
+# the rest are ignored.
+
+port: /dev/tts/0
+type: foldable
+<---------

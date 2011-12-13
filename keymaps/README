@@ -1,0 +1,15 @@
+New Busysbox also includes console-tools for dumping and loading keymaps.
+But those tools can only store and load binary keymaps as stored in the
+kernel. Thus the textual representation has to be compiled into binary form.
+
+Pityly there is no tool for it. So I installed the keymap und dumped it
+afterwards :( Bad technique but only way curently. If anyone knows of a
+better method, please let me know.
+
+  nils
+
+
+Current keymaps in this directory:
+bb-de.kmap	-	Busybox compatible 'de' (German) keymap
+bb-en.kmap	-	Busybox compatible 'en' (English) keymap
+ipaq-de.map	-	German console-tools (ASCII) keymap for iPaq
