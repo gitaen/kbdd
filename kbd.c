@@ -219,12 +219,21 @@ unsigned char key;
 unsigned int  key_down;
 unsigned char keycode;
 
+while(1) {
 	fd = open_serial(TTY_PORT, B9600);
-	if (fd <= 0)
-		return (-1);
 
 	while (fd > 0) {
-		read (fd, buf, 1);
+                int chars_read = read (fd, buf, 1);
+
+                if (chars_read <= 0) {
+                     fprintf(stderr, "Could not read from input device, return value %d: %s.\n", 
+                             chars_read, strerror(errno));
+                     break;
+                }
+
+                if (chars_read == 0)
+                     continue;
+
 		key             =  buf[0];
 		//keyboard sends n when pressing a key
 		// and n+63 when releasing the key
@@ -249,6 +258,14 @@ unsigned char keycode;
        	        	dev_uinput_key(uindev, (unsigned short)keycode, KEY_RELEASED);
 		}
 	}
+
+        if (fd > 0) {
+             close(fd);
+             fd = -1;
+        }
+        
+        sleep(3);
+}
 
 return 0;
 }
