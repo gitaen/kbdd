@@ -211,6 +211,13 @@ unsigned char keycode;
 return 0;
 }
 
+void notify(const char *msg) 
+{
+     char output[1024];
+     snprintf(output, 1024, "dbus-send --system --type=method_call --dest=org.freedesktop.Notifications  /org/freedesktop/Notifications org.freedesktop.Notifications.SystemNoteInfoprint \"string:%s\"", msg);
+     system(output);
+}
+
 int freedom_keyboard(void)
 {
 int fd;
@@ -221,6 +228,8 @@ unsigned char keycode;
 
 while(1) {
 	fd = open_serial(TTY_PORT, B9600);
+        if (fd > 0)
+             notify("Bluetooth keyboard connected");
 
 	while (fd > 0) {
                 int chars_read = read (fd, buf, 1);
@@ -262,6 +271,7 @@ while(1) {
         if (fd > 0) {
              close(fd);
              fd = -1;
+             notify("Bluetooth keyboard disconnected");
         }
         
         sleep(3);
