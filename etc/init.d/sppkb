@@ -41,19 +41,23 @@ case "$1" in
 	load_modules $MODULES
     fi
 
+    killall rfcomm kbdd 2> /dev/null
+
     echo -n "Starting sppkb daemon:"
 
     echo -n " rfcomm"
     RFCOMM_ARGS="--raw --encrypt --auth --secure \
-	connect $RF_CHANNEL $BT_DEVICE"
-    start-stop-daemon --start --quiet --background --exec /usr/bin/rfcomm -- \
-	$RFCOMM_ARGS
+	bind $RF_CHANNEL $BT_DEVICE"
+    /usr/bin/rfcomm $RFCOMM_ARGS
     
-    sleep 2
+    #while [[ ! -e /dev/rfcomm$RF_CHANNEL ]]
+    #do
+    #  sleep 1
+    #done
 
     echo -n " kbdd"
     KBDD_ARGS="-p /dev/rfcomm$RF_CHANNEL -t $KB_TYPE"
-    start-stop-daemon --start --quiet --background --exec /usr/bin/kbdd -- $KBDD_ARGS
+    start-stop-daemon --start --quiet --background --nicelevel -1 --exec /usr/bin/kbdd -- $KBDD_ARGS
 
     echo .
     ;;
@@ -62,7 +66,7 @@ case "$1" in
     echo -n "Stopping sppkb daemon:"
 
     echo -n " rfcomm"
-    start-stop-daemon --stop --quiet --exec /usr/bin/rfcomm
+    #start-stop-daemon --stop --quiet --exec /usr/bin/rfcomm
 
     echo -n " kbdd"
     start-stop-daemon --stop --quiet --exec /usr/bin/kbdd
