@@ -1,0 +1,222 @@
+Here is what I discovered for the Elektex keyboard.
+
+http://www.elektex.com/
+
+Also known as the Mobis Just Mobile RoKy^2 and the 5250 G-Tech Wireless Fabric
+Keyboard
+
+www.mobis.com.tw
+www.just-mobileonline.com
+www.g-techworld.com
+
+All numbers below are in decimal.
+
+When not pressing any key you get a stream of 255.
+When pressing and releasing any key, no matter whether it is a shift key, you
+get one specific number when pressing the key and another specific number when
+releasing the key. The release code appears to be 128+the press code. The
+press codes appear to be ASCII, except for the non-ASCII keys: Caps, Shift,
+Uparrow, Ctrl, Alt, AltGr, Leftarrow, Downarrow, and Rightarrow. The Left and
+Right Shift keys send the same press/release codes. These are the only two
+keys that do so. Also, it appears that it is not possible to distinguish
+between the release of Del and the background stream of 255 since they are
+both coded as 255. Below is a complete table giving the press and release
+codes for each key, along with both the unshifted and shifted symbols on the
+key. Note that the 4 key has two shifted symbols and is the only key that has
+such.
+
+If you press and hold a key then you get a stream of press codes but then a
+single release code when releasing the key. If you press one key, hold it, and
+press a second key and hold it while still holding the first key, you get a
+press code for the first key until you press the second key, then you get
+nothing (except stream of 255s) from the time you press the second key until
+you release both keys. Then you get a single press code for the second key and
+then a single instance of the release codes for both keys. If you press and
+hold three keys you only get (a stream of) press code(s) for the first key
+until you press the second key, then nothing (except stream of 255s) until you
+release all three keys then you get a press code for just the second key but
+not the third and you get release codes for just the first two keys but not
+the third. Sometimes you don't get the release codes but get a 248 instead.
+Sometimes, even when you press and release two keys quickly together you get a
+248. It seems to be some form of roll-over indicator.
+
+There is no difference between modifier and non-modifier keys.
+
+Press Shift Press A Release Shift Release A gives:
+   got: 2
+   key press: 42
+   got: 65
+   chorded key press: 30
+   got: 193
+   chorded key release: 30
+   got: 130
+   key release: 42
+
+Press Shift Press A Release A Release Shift gives:
+   got: 2
+   key press: 42
+   got: 248
+   unrecognized release code
+   got: 130
+   key release: 42
+
+Press and Hold Shift Press A Release A Release Shift gives:
+   got: 2
+   key press: 42
+   got: 2
+   repeat key press: 42
+   got: 2
+   repeat key press: 42
+   got: 2
+   repeat key press: 42
+   got: 248
+   unrecognized release code
+   got: 130
+   key release: 42
+
+Because of the above, it appears possible to recognize chording of the form:
+
+  Press A Press B Release A Release B
+
+but impossible to recognize chording of the form:
+
+  Press A Press B Release B Release A
+
+This makes modifier chording tricky. It also appears impossible to recognize
+chording of more than two keys. This precludes double modifier chording like
+Ctrl-Alt-... or Alt-Shift-....
+
+The Elektex drivers implement modifier keys as prefix keys. My driver does this
+as well. My driver supports two ways to type singly modified keystrokes:
+
+  Press Modifier Press Key Release Modifier Release Key
+
+and:
+
+  Press Modifier Release Modifier Press Key Release Key
+
+The keys (Left and Right) Shift, Ctrl, Alt, and AltGr are treated as modifiers.
+Each press and release of a modifier toggles whether the next key is so
+modified. Thus:
+
+  Press Modifier Release Modifier Press Modifier Release Modifier
+
+does not modify the next keystroke. You can doubly modify a keystroke with
+
+  Press Modifier1 Release Modifier1 Press Modifier2 Release Modifier2
+  Press Key Release Key
+
+Similarly for triple modification and higher. Such modification applies to the
+autorepeat of a keystroke.
+
+Key        Shifted  Press Release
+---------------------------------
+ESC                 27    155
+1          !        49    177
+2          "        50    178
+3          Sterling 51    179
+4          $ Euro   52    180
+5          %        53    181
+6          ^        54    182
+7          &        55    183
+8          *        56    184
+9          (        57    185
+0          )        48    176
+-          _        45    173
+=          +        61    189
+Backspace            8    136
+Tab                  9    137
+Q                   81    209
+W                   87    215
+E                   69    197
+R                   82    210
+T                   84    212
+Y                   89    217
+U                   85    213
+I                   73    201
+O                   79    207
+P                   80    208
+[          {        91    219
+]          }        93    221
+Caps                 3    131
+A                   65    193
+S                   83    211
+D                   68    196
+F                   70    198
+G                   71    199
+H                   72    200
+J                   74    202
+K                   75    203
+L                   76    204
+;          :        59    187
+'          @        39    167
+#          ~        35    163
+Enter               13    141
+Shift                2    130
+\          |        92    220
+Z                   90    218
+X                   88    216
+C                   67    195
+V                   86    214
+B                   66    194
+N                   78    206
+M                   77    205
+,          <        44    172
+.          >        46    174
+/          ?        47    175
+Uparrow             20    148
+Shift                2    130
+Ctrl               112    240
+Alt                113    241
+Space               32    160
+AltGr              114    242
+Del                127    255
+Leftarrow           22    150
+Downarrow           21    149
+Rightarrow          23    151
+
+They keyboard layout differs somewhat from the standard:
+  Shift 2 is " while on most keyboards it is @.
+  Shift 3 is sterling while on most keyboards it is #.
+  Shift ' is @ while on most keyboards it is ".
+  There is a key in a nonstandard location where # is unshifted and ~ is
+  shifted.
+  There is no ` key. This is the only missing key.
+  The key with unshifted \ and shifted | is in a nonstandard location.
+  There is a euro symbol on the 4 key along with $.
+
+Because of the above, the driver operates in two modes:
+  elektex: the key labels are observed except that sterling generates ` and it
+           is not possible to generate sterling or euro
+  elektex_unmapped: shift 2 (i.e. ") generates @
+                    shift 3 (i.e. sterling) generates #
+                    shift ' (i.e. @) generates "
+                    # generates `
+                    not possible to generate sterling or euro
+
+There are 19 of these upon startup:
+   got: 165
+   transitioning to state 1
+   got: 0
+   transitioning to state 2
+   got: 1
+   transitioning to state 3
+   got: 90
+   165, 0, 1, 90 ignored
+I don't know what these are for. They are ignored.
+
+The drivers provided by Elektex support additional functionality:
+  Setting sensitivity
+  Setting key repeat rate
+  Setting key repeat delay
+  Audible keyclicks
+  Setting connection timeout
+  Calibration
+  Reading battery status
+I don't know how to access this functionality.
+
+http://www.g-techworld.com/Drivers/5250/ETP-1833_GTECH_Fabric%20Keyboard%20USER%20GUIDE%20v1.0.pdf
+
+Sometimes I get the message:
+
+   evdev open: No such file or directory

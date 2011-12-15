@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=BtKbStop
+Comment=Connect to bluetooth keyboard
+Exec=/usr/bin/sudo /etc/init.d/sppkb stop
+Icon=statusarea_bluetooth_off
+Terminal=false
+Type=Application
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
