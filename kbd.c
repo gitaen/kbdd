@@ -47,6 +47,7 @@
 
 char debug=0;
 int uindev=0;
+int connect_interval=30;
 static int reinit=0;
 
 #define DEFAULT_TTS "/dev/ttyS0"
@@ -220,29 +221,29 @@ void notify(const char *msg)
 
 int freedom_keyboard(void)
 {
-int fd;
-unsigned char buf[16];
-unsigned char key;
-unsigned int  key_down;
-unsigned char keycode;
+     int fd;
+     unsigned char buf[16];
+     unsigned char key;
+     unsigned int  key_down;
+     unsigned char keycode;
 
-while(1) {
-	fd = open_serial(TTY_PORT, B9600);
-        if (fd > 0)
-             notify("Bluetooth keyboard connected");
+     while(1) {
+          fd = open_serial(TTY_PORT, B9600);
+          if (fd > 0)
+               notify("Bluetooth keyboard connected");
 
-	while (fd > 0) {
-                int chars_read = read (fd, buf, 1);
+          while (fd > 0) {
+               int chars_read = read (fd, buf, 1);
 
-                if (chars_read <= 0) {
-                     fprintf(stderr, "Could not read from input device, return value %d: %s.\n", 
-                             chars_read, strerror(errno));
-                     break;
+               if (chars_read <= 0) {
+                    fprintf(stderr, "Could not read from input device, return value %d: %s.\n", 
+                            chars_read, strerror(errno));
+                    break;
                 }
 
-                if (chars_read == 0)
-                     continue;
-
+               if (chars_read == 0)
+                    continue;
+               
 		key             =  buf[0];
 		//keyboard sends n when pressing a key
 		// and n+63 when releasing the key
@@ -256,28 +257,28 @@ while(1) {
                 }
 	        keycode         = freedom_kbd[key];
 		if (debug)
-			fprintf(stdout, "%02d %02d\n", buf[0], keycode);
+                     fprintf(stdout, "%02d %02d\n", buf[0], keycode);
        	        if ( key_down ) {
-			if (debug)
-				fprintf(stdout,"press %d\n", keycode);
-       	        	dev_uinput_key(uindev, (unsigned short)keycode, KEY_PRESSED);
+                     if (debug)
+                          fprintf(stdout,"press %d\n", keycode);
+                     dev_uinput_key(uindev, (unsigned short)keycode, KEY_PRESSED);
 		} else {
-			if (debug)
-				fprintf(stdout,"release %d\n", keycode);
-       	        	dev_uinput_key(uindev, (unsigned short)keycode, KEY_RELEASED);
+                     if (debug)
+                          fprintf(stdout,"release %d\n", keycode);
+                     dev_uinput_key(uindev, (unsigned short)keycode, KEY_RELEASED);
 		}
-	}
+          }
+          
+          if (fd > 0) {
+               close(fd);
+               fd = -1;
+               notify("Bluetooth keyboard disconnected");
+          }
+          
+          sleep(connect_interval);
+     }
 
-        if (fd > 0) {
-             close(fd);
-             fd = -1;
-             notify("Bluetooth keyboard disconnected");
-        }
-        
-        sleep(3);
-}
-
-return 0;
+     return 0;
 }
 
 int select_read(int fd, int timeout_sec, int timeout_us)
@@ -1360,11 +1361,13 @@ void print_usage(char *arg0)
 {
 	fprintf (stderr, "kbdd %s\n", VERSION);
 	fprintf (stderr, "Usage:\n");
-	fprintf (stderr, "%s [-d] [-h] [-c <config file>] -p <serial-port> -t <kbd type>\n", arg0);
+	fprintf (stderr, "%s [-d] [-h] [-c <config file>] [-i <connect interval>] -p <serial-port> -t <kbd type>\n", arg0);
 	fprintf (stderr, "-d\tenable debugging output\n");
 	fprintf (stderr, "-h\tprint this help\n");
 	fprintf (stderr, "-c <config file>\n");
 	fprintf (stderr, "\tRead port and type from config file\n");
+	fprintf (stderr, "-i <connect interval>\n");
+        fprintf (stderr, "\tset interval for polling keyboard in s (default: 30)\n");
 	fprintf (stderr, "-p <serial-port>\n");
 	fprintf (stderr, "\tspecify serial port device, default %s\n", DEFAULT_TTS);
 	fprintf (stderr, "-t <kbd type>\n");
@@ -1517,7 +1520,7 @@ int main(int argc, char **argv)
 int optc;
 int kbdtype=KBD_TYPE_NONE;
 
-	while ((optc = getopt(argc, argv, "c:t:p:dh")) != -1) {
+	while ((optc = getopt(argc, argv, "c:t:p:i:dh")) != -1) {
 		switch ((char)optc) {
 			case 'h':
 				print_usage(argv[0]);
@@ -1535,6 +1538,10 @@ int kbdtype=KBD_TYPE_NONE;
 			case 'c':
 				parse_config(optarg, &kbdtype, TTY_PORT);
 				break;
+                        case 'i':
+                                connect_interval = atoi(optarg);
+                                printf("Setting connection interval to %d.\n", connect_interval);
+                                break;
 		}
 	}
 
