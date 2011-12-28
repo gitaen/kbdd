@@ -803,6 +803,7 @@ unsigned char smartbt_normal[64] = {
  *	Freedom keyboard
  *
  *	David Lapetina ntic at lapetina dot org
+ *      Fixes from Ralf Dragon dragon at tnt dot uni-hannover dot de
  *
  *	Key down sends one byte: (KEY)
  *	Key up sends  one byte:  (KEY+63(!!))

@@ -1,7 +1,7 @@
 #CC	=	gcc
 CFLAGS	=	-Wall -Os
 
-VERSION	=	\"V0.10\"
+VERSION	=	\"V0.12\"
 CFLAGS	+=	-DVERSION=$(VERSION)
 
 # for use with LIRC, uncomment the following two lines

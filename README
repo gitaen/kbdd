@@ -44,6 +44,10 @@ v0.11
 	Provide kbdd binary for fremantle
 	        by Ralf Dragon <dragon@tnt.uni-hannover.de>
 
+v0.12
+	Allow to specify polling time
+                by Ralf Dragon <dragon@tnt.uni-hannover.de>
+
 kbdd - a userspace daemon/driver for serial keyboard devices
 
 Uses uinput.
