@@ -1,1 +1,2 @@
 user ALL = NOPASSWD: /etc/init.d/kbdd *
+user ALL = NOPASSWD: /sbin/start kbdd, /sbin/stop kbdd
