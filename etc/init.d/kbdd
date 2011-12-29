@@ -1,0 +1,86 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          kbdd
+# Default-Start:     
+# Default-Stop:      0 1 2 3 4 5 6
+# Short-Description: Starts kbdd kbdd daemon.
+### END INIT INFO
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+
+load_modules ()
+{
+	MODULES_MISSING=false
+
+	for mod in $*
+	do
+		modprobe $mod 2> /dev/null || MODULES_MISSING=true
+	done
+
+	if [ "$MODULES_MISSING" = true ]; then
+		echo "#####################################################"
+		echo "## I couldn't load the required kernel modules     ##"
+		echo "#####################################################"
+	fi
+}
+
+
+test -f /usr/bin/kbdd || exit 0
+test -f /usr/bin/rfcomm || exit 0
+
+LOAD_MODULES=true
+MODULES=uinput
+
+kbdd_config_prefix=/etc/bluetooth/kbdd/
+
+case "$1" in
+  start)
+    if [ "$LOAD_MODULES" = "true" ]; then
+	load_modules $MODULES
+    fi
+
+    /usr/bin/rfcomm bind all
+    # this creates /dev/rfcomm* devices from /etc/bluetooth/rfcomm.conf    
+
+    echo -n "Starting kbdd daemon:"
+
+    for file in ${kbdd_config_prefix}*.conf
+    do
+       name=${file#$kbdd_config_prefix}
+       echo -n " $name"
+       KBDD_ARGS="-c $file"
+       start-stop-daemon --start --quiet --background --nicelevel -1 \
+	 --pidfile /var/run/kdbb${name}.pid --make-pidfile \
+	 --exec /usr/bin/kbdd -- $KBDD_ARGS
+    done
+    echo .
+    ;;
+
+  stop)
+    echo -n "Stopping sppkb daemon:"
+
+    for file in ${kbdd_config_prefix}*.conf
+    do
+       name=${file#$kbdd_config_prefix}
+       echo -n " $name"
+       start-stop-daemon --stop --quiet \
+	 --pidfile /var/run/kdbb${name}.pid \
+	 --exec /usr/bin/kbdd
+    done
+
+    rfcomm release all
+
+    echo .
+    ;;
+
+  restart)
+    $0 stop
+    $0 start
+    ;;
+
+  *)
+    echo "Usage: /etc/init.d/kbdd {start|stop|restart}"
+    exit 1
+esac
+
+exit 0

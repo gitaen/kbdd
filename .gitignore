@@ -1,3 +1,4 @@
 dev_uinput.o
 kbd.o
-kbdd
+./kbdd
+*~
