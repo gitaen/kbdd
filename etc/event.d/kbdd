@@ -1,0 +1,25 @@
+description "Start kbdd daemon."
+author "Ralf Dragon"
+
+start on started bluetoothd
+stop on stopping bluetoothd
+#console none
+service
+
+# unluckily upstart 0.3 prevents this so we can only have one instance
+#instance $CONFIG_FILE
+
+# upstart 0.3 does not allow passing variables so we fix the filename
+#exec /usr/bin/kbdd -c $CONFIG_FILE
+
+# upstart 0.3 does not allow worker services, thus we do everything in one file
+script
+	modprobe uinput
+
+	/usr/bin/rfcomm bind all
+	# this creates /dev/rfcomm* devices from /etc/bluetooth/rfcomm.conf    
+
+	exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
+end script
+
+post-stop exec rfcomm release all
