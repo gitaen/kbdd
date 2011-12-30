@@ -16,7 +16,7 @@ OBJ	=	kbd.o dev_uinput.o
 
 all:	kbdd
 
-install: kbdd
+install: kbdd kbdd_create_config.sh
 	mkdir -p $(DESTDIR)/usr/bin
 	cp -a $^ $(DESTDIR)/usr/bin
 	cp -ar install/etc install/usr $(DESTDIR)
