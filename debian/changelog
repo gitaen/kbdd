@@ -1,5 +1,9 @@
 kbdd (0.10Maemo0-1) unstable; urgency=low
 
-  * Initial release
+  * package kbdd
+  * update kbdd to maemo 5
+  * create upstart scripts
+  * create device detection script kbdd_create_config
+  * create desktop files and icons
 
- -- Ralf Dragon <dragon@tnt.uni-hannover.de>  Fri, 30 Dec 2011 01:21:42 +0100
+ -- Ralf Dragon <dragon@tnt.uni-hannover.de>  Fri, 30 Dec 2011 20:21:42 +0100

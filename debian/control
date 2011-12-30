@@ -28,5 +28,5 @@ Description: kbdd for serial bluetooth keyboards
         micropad  - Micro Innovations Datapad
         microkbd  - Compaq MicroKeyboard
  To enable kbdd for your keyboard, two steps are neccessary
- - Enable the keyboard device in /etc/bluetooth/rfcomm.conf
- - Specify the keyboard in /etc/bluetooth/kbdd/kbdd.conf
+ - Pair the device such that it appears in the bluetooth device list
+ - Specify the keyboard driver using kbdd_create_config
