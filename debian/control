@@ -4,7 +4,8 @@ Priority: extra
 Maintainer: Ralf Dragon <dragon@tnt.uni-hannover.de>
 Build-Depends: debhelper (>= 7.0.50~), libc-dev
 Standards-Version: 3.8.4
-Homepage: http://fanoush.wz.cz/maemo/
+Homepage: kbdd.garage.maemo.org
+XSBC-Bugtracker: http://kbdd.garage.maemo.org
 #Vcs-Git: git://norgay.homelinux.org/srv/git/kbdd
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/kbdd.git;a=summary
 
@@ -12,6 +13,8 @@ Package: kbdd
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends} 
 Description: kbdd for serial bluetooth keyboards
+ kbdd is a daemon to connect serial bluetooth keyboards to uinput
+ .
  kbdd can enable the following bluetooth keyboards:
         foldable  - Compaq/HP foldable keyboard
         stowaway  - Targus Stowaway keyboard
@@ -27,6 +30,10 @@ Description: kbdd for serial bluetooth keyboards
         microfold - Micro Innovations Foldaway keyboard
         micropad  - Micro Innovations Datapad
         microkbd  - Compaq MicroKeyboard
+ .
  To enable kbdd for your keyboard, two steps are neccessary
- - Pair the device such that it appears in the bluetooth device list
- - Specify the keyboard driver using kbdd_create_config
+  - Pair the device such that it
+    appears in the bluetooth device list
+  - Specify the keyboard driver using
+    kbdd_create_config
+
