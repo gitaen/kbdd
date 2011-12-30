@@ -1,4 +1,9 @@
 dev_uinput.o
 kbd.o
-./kbdd
+kbdd
 *~
+.pc
+debian/kbdd
+debian/patches
+debian/files
+debian/kbdd.*

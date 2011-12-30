@@ -1,0 +1,32 @@
+Source: kbdd
+Section: user/system
+Priority: extra
+Maintainer: Ralf Dragon <dragon@tnt.uni-hannover.de>
+Build-Depends: debhelper (>= 7.0.50~), libc-dev
+Standards-Version: 3.8.4
+Homepage: http://fanoush.wz.cz/maemo/
+#Vcs-Git: git://norgay.homelinux.org/srv/git/kbdd
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/kbdd.git;a=summary
+
+Package: kbdd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends} 
+Description: kbdd for serial bluetooth keyboards
+ kbdd can enable the following bluetooth keyboards:
+        foldable  - Compaq/HP foldable keyboard
+        stowaway  - Targus Stowaway keyboard
+        stowawayxt - Stowaway XT
+        snapntype - Snap'n'Type
+        hpslim    - HP Slim keyboard
+        smartbt   - Smart Bluetooth keyboard
+        lirc      - LIRC consumer IR
+        belkinir  - Belkin IR (not IrDA)
+        flexis    - Flexis FX-100 keyboard
+        g250      - Benq G250 gamepad
+        pocketvik - GrandTec PocketVIK
+        microfold - Micro Innovations Foldaway keyboard
+        micropad  - Micro Innovations Datapad
+        microkbd  - Compaq MicroKeyboard
+ To enable kbdd for your keyboard, two steps are neccessary
+ - Enable the keyboard device in /etc/bluetooth/rfcomm.conf
+ - Specify the keyboard in /etc/bluetooth/kbdd/kbdd.conf
