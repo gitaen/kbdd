@@ -5,6 +5,7 @@ start on started bluetoothd
 stop on stopping bluetoothd
 #console none
 service
+nice -10
 
 # unluckily upstart 0.3 prevents this so we can only have one instance
 #instance $CONFIG_FILE
