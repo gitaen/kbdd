@@ -91,8 +91,8 @@ else
 	echo "apply y/n?"
 	read apply
 	if [ $apply == y ]; then
-		cp /tmp/rfcomm.conf /etc/bluetooth/rfcomm.conf
-		cp /tmp/kbdd.conf /etc/bluetooth/kbdd/kbdd.conf
+		mv -f /tmp/rfcomm.conf /etc/bluetooth/rfcomm.conf
+		mv -f /tmp/kbdd.conf /etc/bluetooth/kbdd/kbdd.conf
 	else
 		echo
 		echo "The config files are in /tmp. You can still manually copy them"
