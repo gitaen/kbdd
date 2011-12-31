@@ -30,6 +30,10 @@ Description: kbdd for serial bluetooth keyboards
         microfold - Micro Innovations Foldaway keyboard
         micropad  - Micro Innovations Datapad
         microkbd  - Compaq MicroKeyboard
+        freedom   - Freedom keyboard
+	btfoldable - HP iPAQ Bluetooth Foldable Keyboard
+	elektex   - Elektex Cloth Keyboard
+	elektex_unmapped - Elektex Cloth Keyboard (Unmapped)
  .
  To enable kbdd for your keyboard, two steps are neccessary
   - Pair the device such that it

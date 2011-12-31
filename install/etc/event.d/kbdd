@@ -20,6 +20,8 @@ script
 	/usr/bin/rfcomm bind all
 	# this creates /dev/rfcomm* devices from /etc/bluetooth/rfcomm.conf    
 
+	sleep 3
+
 	exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
 end script
 

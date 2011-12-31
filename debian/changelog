@@ -1,3 +1,13 @@
+kbdd (0.10Maemo0-4) unstable; urgency=low
+
+  * FIRST CHANGELOG WRITTEN BY A KBDD KEYBOARD
+  * wait after binding rfcomm
+  * add keyboards to description
+  * make backup copies of files to be overwritten
+    by the detectr script
+
+ -- Ralf Dragon <dragon@tnt.uni-hannover.de>  Fri, 30 Dec 2012 22:14:42 +0100
+
 kbdd (0.10Maemo0-3) unstable; urgency=low
 
   * set bugtracker and homepage to garage page
