@@ -7,6 +7,7 @@ kbdd (0.10Maemo0-4) unstable; urgency=low
     by the configure kbdd script
   * create icon to configure kbdd and remove icons to start and stop kbdd
   * update package description
+  * change backup mode to be able to use busybox mv
 
  -- Ralf Dragon <dragon@tnt.uni-hannover.de>  Sun, 1 Jan 2012 20:10:16 +0100
 
