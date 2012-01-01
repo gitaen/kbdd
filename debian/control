@@ -30,14 +30,28 @@ Description: kbdd for serial bluetooth keyboards
         microfold - Micro Innovations Foldaway keyboard
         micropad  - Micro Innovations Datapad
         microkbd  - Compaq MicroKeyboard
-        freedom   - Freedom keyboard
+        freedom   - Freedom keyboard (patched layout of bottom row)
 	btfoldable - HP iPAQ Bluetooth Foldable Keyboard
 	elektex   - Elektex Cloth Keyboard
 	elektex_unmapped - Elektex Cloth Keyboard (Unmapped)
  .
  To enable kbdd for your keyboard, two steps are neccessary
   - Pair the device such that it
-    appears in the bluetooth device list
+    appears in the bluetooth device list.
   - Specify the keyboard driver using
-    kbdd_create_config
-
+    the kbdd config button.
+ The bluetooth icon turns from white to blue if the keyboard
+ is connected and a banner gets displayed.
+ .
+ The kbdd daemon tries to connect to the keyboard every 30s,
+ so the battery drain should not be too big. It connects
+ to the uinput kernel module to create a virtual keyboard.
+ The extkbd package can be used to automatically configure
+ the keyboard layout.
+ .
+ The original kbdd was spiced up with maemo patches to
+ output a banner if the keyboard connected or disconnected.
+ Since I only own a freedom keyboard, so far I only provide
+ maemo patches for the freedom driver. However, the
+ non-patched kbdd shoud run out of the box (without
+ output banner).
