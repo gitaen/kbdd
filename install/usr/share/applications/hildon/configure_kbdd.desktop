@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Configure kbdd
+Comment=Configure bluetooth keyboard
+Exec=/usr/bin/osso-xterm -e "/usr/bin/sudo /usr/bin/kbdd_create_config"
+Icon=kbdd_on
+Terminal=true
+Type=Application
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
+
+
