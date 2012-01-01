@@ -25,7 +25,7 @@ pre-start script
 	# we wait 10s max or untile the device file exists
 
 	i=1
-	while test "(! -e /dev/rfcomm1) -a ($i -le 10)"
+	while [ '(' '!' -e /dev/rfcomm1 ')' -a '(' $i -le 10 ')' ]
 	do 
 	   sleep 1
 	   i=$((i+1))
@@ -36,3 +36,4 @@ end script
 exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
 
 post-stop exec rfcomm release all
+12838
