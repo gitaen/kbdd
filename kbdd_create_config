@@ -107,5 +107,9 @@ else
 fi
 
 
-
 start kbdd
+
+
+echo "Configuration finished. Press return to exit."
+read something
+
