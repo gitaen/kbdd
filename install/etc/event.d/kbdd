@@ -21,6 +21,16 @@ pre-start script
 
 	/usr/bin/rfcomm bind all
 	# this creates /dev/rfcomm* devices from /etc/bluetooth/rfcomm.conf    
+	# it may take some seconds until the device is created
+	# we wait 10s max or untile the device file exists
+
+	i=1
+	while test "(! -e /dev/rfcomm1) -a ($i -le 10)"
+	do 
+	   sleep 1
+	   i=$((i+1))
+	done
+
 end script
 
 exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
