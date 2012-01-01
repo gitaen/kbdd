@@ -5,6 +5,7 @@ start on started bluetoothd
 stop on stopping bluetoothd
 #console none
 service
+respawn
 nice -10
 
 # unluckily upstart 0.3 prevents this so we can only have one instance
@@ -14,15 +15,14 @@ nice -10
 #exec /usr/bin/kbdd -c $CONFIG_FILE
 
 # upstart 0.3 does not allow worker services, thus we do everything in one file
-script
+
+pre-start script
 	modprobe uinput
 
 	/usr/bin/rfcomm bind all
 	# this creates /dev/rfcomm* devices from /etc/bluetooth/rfcomm.conf    
-
-	sleep 3
-
-	exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
 end script
+
+exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
 
 post-stop exec rfcomm release all
