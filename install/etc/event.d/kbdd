@@ -36,4 +36,3 @@ end script
 exec /usr/bin/kbdd -c /etc/bluetooth/kbdd/kbdd.conf
 
 post-stop exec rfcomm release all
-12838
