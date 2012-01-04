@@ -1,3 +1,10 @@
+kbdd (0.10Maemo0-5) unstable; urgency=low
+
+  * remove bogus line in upstart script
+  * fix package description
+
+ -- Ralf Dragon <dragon@tnt.uni-hannover.de>  Wed, 4 Jan 2012 11:37:16 +0100
+
 kbdd (0.10Maemo0-4) unstable; urgency=low
 
   * FIRST CHANGELOG WRITTEN BY A KBDD KEYBOARD
