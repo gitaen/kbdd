@@ -55,3 +55,12 @@ Description: kbdd for serial bluetooth keyboards
  maemo patches for the freedom driver. However, the
  non-patched kbdd shoud run out of the box (without
  output banner).
+ .
+ Unluckily there are quite a few different freedom keyboards around.
+ There is the
+ [a href="http://www.treocentral.com/images/admin_uploaded/1115839015.gif"]freedom
+ keyboard[/a] (which the freedom driver supports), the
+ [a href="http://www.freedominput.com/images/site/products/keyboards/iconnect/gallery//i-connect-with-iphone.png"]freedom
+ i-connex[/a], the [a href="http://i.imgur.com/ng00m.jpg"]freedom universal keyboard 2[/a] and the
+ [a href="http://www.freedominput.com/shop?page=shop.product_details&category_id=6&flypage=flypage.tpl&product_id=63&vmcchk=1"]freedom
+ pro[/a].
