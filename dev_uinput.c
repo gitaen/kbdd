@@ -99,7 +99,7 @@ int fd, aux;
 return fd;
 }
 
-dev_uinput_set_debug(int debug)
+void dev_uinput_set_debug(int debug)
 {
     _nooutput = debug;
 }
