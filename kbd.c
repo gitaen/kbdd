@@ -1520,7 +1520,7 @@ int main(int argc, char **argv)
 int optc;
 int kbdtype=KBD_TYPE_NONE;
 
-	while ((optc = getopt(argc, argv, "c:t:p:i:dh")) != -1) {
+	while ((optc = getopt(argc, argv, "c:t:p:i:dhn")) != -1) {
 		switch ((char)optc) {
 			case 'h':
 				print_usage(argv[0]);
@@ -1529,7 +1529,10 @@ int kbdtype=KBD_TYPE_NONE;
 			case 'd':
 				debug = 1;
 				break;
-			case 't':
+                        case 'n':
+                                dev_uinput_set_debug(1);
+                                break;
+                        case 't':
 				kbdtype = find_kbd_type(optarg);
 				break;
 			case 'p':

@@ -31,6 +31,8 @@
 
 #include "dev_uinput.h"
 
+static int _nooutput = 0;
+
 /* taken from linux/bitops.h */
 static inline int test_bit(int nr, const volatile unsigned long *p){
 	return (p[nr >> 5] >> (nr & 31)) & 1UL;
@@ -97,9 +99,14 @@ int fd, aux;
 return fd;
 }
 
+dev_uinput_set_debug(int debug)
+{
+    _nooutput = debug;
+}
+
 int dev_uinput_key(int fd, unsigned short code, int pressed)
 {
-struct uinput_event event;
+        struct uinput_event event;
 	if (code<=KEY_MAX){
 		/* remember pressed keys, we release them on exit */
 		if (pressed)
@@ -112,7 +119,10 @@ struct uinput_event event;
 	event.code = code;
 	event.value = pressed; // (0 release, 1 press?)
 
-return (write(fd, &event, sizeof(event)));
+        if (_nooutput)
+            return sizeof(event);
+        else
+            return (write(fd, &event, sizeof(event)));
 }
 
 void dev_uinput_close(int fd)
