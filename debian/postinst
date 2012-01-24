@@ -18,7 +18,12 @@ set -e
 # for details, see http://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
 
-maemo-confirm-text "Important bugs" bugs
+tmp=/tmp/bugs-kbdd
+cat > $tmp <<EOF
+The virtual onscreen keyboard was reported not to work as long as kbdd is installed.
+EOF
+maemo-confirm-text "Important bugs" $tmp
+rm -f $tmp
 
 
 case "$1" in
