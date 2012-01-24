@@ -5,6 +5,7 @@
 
 set -e
 
+
 # summary of how this script can be called:
 #        * <postinst> `configure' <most-recently-configured-version>
 #        * <old-postinst> `abort-upgrade' <new version>
@@ -16,6 +17,8 @@ set -e
 #          <conflicting-package> <version>
 # for details, see http://www.debian.org/doc/debian-policy/ or
 # the debian-policy package
+
+maemo-confirm-text "Important bugs" bugs
 
 
 case "$1" in

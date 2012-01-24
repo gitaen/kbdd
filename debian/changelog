@@ -1,3 +1,10 @@
+kbdd (0.10Maemo0-6.1) unstable; urgency=low
+
+  * update documentation (html tags, bugs)
+  * add bug confirmation
+
+ -- Ralf Dragon <dragon@tnt.uni-hannover.de>  Tue, 24 Jan 2012 07:43:08 +0100
+
 kbdd (0.10Maemo0-6) unstable; urgency=low
 
   * add -n option for testing (no key events are sent to dbus)

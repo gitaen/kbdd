@@ -6,12 +6,10 @@ Build-Depends: debhelper (>= 7.0.50~), libc-dev
 Standards-Version: 3.8.4
 Homepage: http://kbdd.garage.maemo.org
 XSBC-Bugtracker: https://garage.maemo.org/tracker/?atid=7637&group_id=2285&func=browse
-#Vcs-Git: git://norgay.homelinux.org/srv/git/kbdd
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/kbdd.git;a=summary
 
 Package: kbdd
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends} 
+Depends: ${shlibs:Depends}, ${misc:Depends}, maemo-installer-utils 
 Description: kbdd for serial bluetooth keyboards
  kbdd is a daemon to connect serial bluetooth keyboards to uinput
  .
@@ -58,9 +56,9 @@ Description: kbdd for serial bluetooth keyboards
  .
  Unluckily there are quite a few different freedom keyboards around.
  There is the
- [a href="http://www.treocentral.com/images/admin_uploaded/1115839015.gif"]freedom
- keyboard[/a] (which the freedom driver supports), the
- [a href="http://www.freedominput.com/images/site/products/keyboards/iconnect/gallery//i-connect-with-iphone.png"]freedom
- i-connex[/a], the [a href="http://i.imgur.com/ng00m.jpg"]freedom universal keyboard 2[/a] and the
- [a href="http://www.freedominput.com/shop?page=shop.product_details&category_id=6&flypage=flypage.tpl&product_id=63&vmcchk=1"]freedom
- pro[/a].
+ <a href="http://www.treocentral.com/images/admin_uploaded/1115839015.gif">freedom
+ keyboard</a> (which the freedom driver supports), the
+ <a href="http://www.freedominput.com/images/site/products/keyboards/iconnect/gallery//i-connect-with-iphone.png">freedom
+ i-connex</a>, the <a href="http://i.imgur.com/ng00m.jpg">freedom universal keyboard 2</a> and the
+ <a href="http://www.freedominput.com/shop?page=shop.product_details&category_id=6&flypage=flypage.tpl&product_id=63&vmcchk=1">freedom
+ pro</a>.
