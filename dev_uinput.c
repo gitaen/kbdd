@@ -86,6 +86,10 @@ int fd, aux;
 		close(fd);
 		return -1;
 	}
+	if (ioctl(fd, UI_SET_EVBIT, EV_SYN) != 0) {
+		close(fd);
+		return -1;
+	}
 	for (aux = KEY_RESERVED; aux <= KEY_UNKNOWN; aux++)
 		if (ioctl(fd, UI_SET_KEYBIT, aux) != 0) {
 			close(fd);
@@ -118,6 +122,11 @@ int dev_uinput_key(int fd, unsigned short code, int pressed)
 	event.type = EV_KEY;
 	event.code = code;
 	event.value = pressed; // (0 release, 1 press?)
+	write(fd, &event, sizeof(event));
+
+	event.type = EV_SYN;
+	event.code = SYN_REPORT;
+	event.value = 0;
 
         if (_nooutput)
             return sizeof(event);
